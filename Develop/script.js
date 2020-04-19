@@ -1,49 +1,82 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
+var upperEl = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var lowerEl = 'abcdefghijklmnopqrstuvwxyz';
+var numEl = '0123456789';
+var specialEl = '~!@#$%^&*()_+=';
 
-document.getElementById("generate").addEventListener("click", function () {
-  //passLength = prompt("How long do you want the password to be? (8 - 128 characters) ");
- // passSpecial = prompt("Please write which special characters you'd like (Uppercase, Lowercase, Symbol, Numbers")
+var button = document.getElementById("generate");
+
+
+var userChoices = {};
+
+
+button.addEventListener("click", function () {
+  var charLength = parseInt(prompt("Please type in a number between 8 and 128."));
+
+  if ((charLength > 7) && (charLength < 129)) {
+
+    promptUser();
+
+  }
+
+  else {
+    alert("Please enter a valid range please.")
+  }
+
+  console.log(charLength)
+
+  function promptUser() {
+    var numChar = confirm("Would you like numbers?");
+    var lowerChar = confirm("Would you like lowercase characters?");
+    var upperChar = confirm("Would you like uppercase characters?");
+    var special = confirm("Would you like special characters?");
+
+    if (numChar) {
+      userChoices["numEl"] = numEl;
+    }
+
+    if (lowerChar) {
+      userChoices["lowerEl"] = lowerEl;
+    }
+    if (upperChar) {
+      userChoices["upperEl"] = upperEl;
+    }
+    if (special) {
+      userChoices["specialEl"] = specialEl;
+    }
+
+
+    console.log(userChoices);
+  }
+
+
+  function writePassword() {
+    let finalPassword = '';
+    for (var i = 0; i < charLength; i++) {
+
+      let passwordEls = Object.keys(userChoices)
+      let randomEl = passwordEls[Math.floor(Math.random() * passwordEls.length)]
+      let char = getRandomCharacter(userChoices[randomEl]);
+
+      finalPassword += char;
+
+      console.log('RandomCharacter', char);
+      console.log(finalPassword, finalPassword.length);
+      console.log('>>>>>>>>>>>>>>>>', charLength)
+
+
+
+    }
+    return finalPassword
+  }
+
+  function getRandomCharacter(str) {
+    return str[Math.floor(Math.random() * str.length)]
+  }
 
   writePassword();
-});
 
-
-
-
-
-function generatePassword()
-{
- return getRandomNumber() + getRandomUpper() + getRandomLower();}
-
-function getRandomLower() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-}
-
-
-function getRandomUpper() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-}
-
-
-function getRandomNumber() {
-  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-}
-
-function getRandomSymbol() {
-  var symbols = "!@#$%^&*"
-
-  return symbols[Math.random() * symbols.length]
-}
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-
+  password.innerHTML = writePassword();
+})
 
 
 
