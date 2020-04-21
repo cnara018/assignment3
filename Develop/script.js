@@ -33,35 +33,36 @@ button.addEventListener("click", function () {
     if (numChar) {
       userChoices["numEl"] = numEl;
     }
-    else {
-      !numChar;
+    else if (!numChar) {
+      !userChoices["numEL"];
     }
 
     if (lowerChar) {
       userChoices["lowerEl"] = lowerEl;
     }
-    else {
-      !lowerChar;
+    else if (!lowerChar) {
+      !userChoices["lowerEL"];
     }
     if (upperChar) {
       userChoices["upperEl"] = upperEl;
     }
-    else {
-      !upperChar;
+    else if (!upperChar) {
+      !userChoices["upperEl"];
     }
     if (special) {
       userChoices["specialEl"] = specialEl;
     }
-    else {
-      !special;
+    else if (!special) {
+      !userChoices["specialEl"];
     }
 
-    if(!numChar && !special && !upperChar && !lowerChar )
+    if(!numChar && !special && !upperChar && !lowerChar) 
     {
-      alert("Atleast one must be selected")
+      alert("Atleast one must be selected");
+    
     }
+    
 
-    else
     console.log(userChoices);
   }
 
